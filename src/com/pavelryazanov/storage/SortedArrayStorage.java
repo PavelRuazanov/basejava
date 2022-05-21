@@ -4,38 +4,26 @@ import com.pavelryazanov.model.Resume;
 
 import java.util.Arrays;
 
-public class SortedArrayStorage extends AbstractArrayStorage{
-
-
+public class SortedArrayStorage extends AbstractArrayStorage {
     @Override
-    public void clear() {
-
+    protected void fillDeleteElement(int index) {
+        int numMove = size - index - 1;
+        if (numMove > 0) {
+            System.arraycopy(storage, index + 1, storage, index, numMove);
+        }
     }
 
     @Override
-    public void update(Resume r) {
-
+    protected void insertElementArrays(Resume r, int index) {
+//        http://codereview.stackexchange.com/questions/36221/binary-search-for-inserting-in-array#answer-36239
+        int insertIndex = -index - 1;
+        System.arraycopy(storage, insertIndex, storage, insertIndex + 1, size - insertIndex);
+        storage[insertIndex] = r;
     }
 
-    @Override
-    public void save(Resume r) {
-
-    }
-
-    @Override
-    public void delete(String uuid) {
-
-    }
-
-    @Override
-    public Resume[] getAll() {
-        return new Resume[0];
-    }
-
-    @Override
     protected int getIndex(String uuid) {
         Resume searchKey = new Resume();
         searchKey.setUuid(uuid);
-        return Arrays.binarySearch(storage,0,size, searchKey);
+        return Arrays.binarySearch(storage, 0, size, searchKey);
     }
 }
