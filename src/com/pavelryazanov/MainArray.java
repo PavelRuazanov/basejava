@@ -1,18 +1,15 @@
 package com.pavelryazanov;
 
-import com.pavelryazanov.model.Resume;
 import com.pavelryazanov.storage.ArrayStorage;
 import com.pavelryazanov.storage.Storage;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 
 
 public class MainArray {
     private final static Storage ARRAY_STORAGE = new ArrayStorage();
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException {/*{
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         Resume r;
         while (true) {
@@ -61,9 +58,9 @@ public class MainArray {
                     break;
             }
         }
-    }
+    }*/
 
-    static void printAll() {
+  /*  static void printAll() {
         Resume[] all = ARRAY_STORAGE.getAll();
         System.out.println("----------------------------");
         if (all.length == 0) {
@@ -74,5 +71,6 @@ public class MainArray {
             }
         }
         System.out.println("----------------------------");
+    }*/
     }
 }
