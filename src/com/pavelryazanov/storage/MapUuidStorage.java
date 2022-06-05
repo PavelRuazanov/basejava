@@ -2,55 +2,54 @@ package com.pavelryazanov.storage;
 
 import com.pavelryazanov.model.Resume;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class MapUuidStorage extends AbstractStorage{
+public class MapUuidStorage extends AbstractStorage<String> {
 
     private final Map<String, Resume> map = new HashMap<>();
 
 
     @Override
-    protected Object getSearchKey(String uuid) {
-
-        return null;
+    protected String getSearchKey(String uuid) {
+        return uuid;
     }
 
     @Override
-    protected void doUpdate(Resume r, Object searchKey) {
-map.replace((String) searchKey,r);
+    protected void doUpdate(Resume r, String searchKey) {
+        map.replace( searchKey, r);
     }
 
     @Override
-    protected boolean isExist(Object searchKey) {
+    protected boolean isExist(String searchKey) {
         return map.containsKey(searchKey);
     }
 
     @Override
-    protected void doSave(Resume r, Object searchKey) {
-map.put((String) searchKey,r);
+    protected void doSave(Resume r, String searchKey) {
+        map.put( searchKey, r);
     }
 
     @Override
-    protected Resume doGet(Object searchKey) {
+    protected Resume doGet(String searchKey) {
         return map.get(searchKey);
     }
 
     @Override
-    protected void doDelete(Object searchKey) {
-
+    protected void doDelete(String searchKey) {
+        map.remove(searchKey);
     }
 
     @Override
     public void clear() {
         map.clear();
-
     }
 
     @Override
-    public List<Resume> getAllSorted() {
-        return null;
+    public List<Resume> doCopyAll() {
+        return new ArrayList<>(map.values());
     }
 
     @Override

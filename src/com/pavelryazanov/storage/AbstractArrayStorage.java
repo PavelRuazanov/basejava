@@ -1,13 +1,13 @@
 package com.pavelryazanov.storage;
 
+
 import com.pavelryazanov.exception.StorageException;
 import com.pavelryazanov.model.Resume;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public abstract class AbstractArrayStorage extends AbstractStorage {
+public abstract class AbstractArrayStorage extends AbstractStorage<Integer> {
 
     protected static final int STORAGE_LIMIT = 10000;
     protected final Resume[] storage = new Resume[STORAGE_LIMIT];
@@ -17,8 +17,8 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
         return size;
     }
 
-    public Resume doGet(Object index) {
-        return storage[(Integer) index];
+    public Resume doGet(Integer index) {
+        return storage[index];
     }
 
     public void clear() {
@@ -26,28 +26,28 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
         size = 0;
     }
 
-    public void doDelete(Object index) {
+    public void doDelete(Integer index) {
         fillDeleteElement((Integer) index);
         storage[size - 1] = null;
         size--;
     }
 
-    public void doUpdate(Resume r, Object index) {
-        storage[(Integer) index] = r;
+    public void doUpdate(Resume r, Integer index) {
+        storage[index] = r;
     }
 
-    public void doSave(Resume r, Object index) {
+    public void doSave(Resume r, Integer index) {
         if (size + 1 > storage.length) throw new StorageException("Массив заполнен", r.getUuid());
-        insertElementArrays(r, (Integer) index);
+        insertElementArrays(r, index);
         size++;
     }
 
     @Override
-    protected boolean isExist(Object searchKey) {
-        return (Integer) searchKey >= 0;
+    protected boolean isExist(Integer searchKey) {
+        return searchKey >= 0;
     }
 
-    public List<Resume> getAllSorted() {
+    public List<Resume> doCopyAll() {
         Resume[] result = Arrays.copyOfRange(storage, 0, size);
         return Arrays.asList(result);
     }
