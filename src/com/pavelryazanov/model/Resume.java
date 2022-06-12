@@ -1,5 +1,7 @@
 package com.pavelryazanov.model;
 
+import java.util.EnumMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -12,14 +14,21 @@ public class Resume implements Comparable<Resume> {
     private final String uuid;
     private String fullName;
 
+    private final Map<ContactType, String> contacts = new EnumMap<>(ContactType.class);
+    private final Map<SectionType, Section> sections = new EnumMap<>(SectionType.class);
+
     public Resume(String uuid, String fullName) {
         Objects.requireNonNull(uuid, "UUID must be not NULL");
         Objects.requireNonNull(fullName, "fullName must be not NULL");
         this.uuid = uuid;
         this.fullName = fullName;
     }
-
-
+    public String getContact(ContactType contactType){
+        return contacts.get(contactType);
+    }
+    public Section getSection(SectionType sectionType){
+        return sections.get(sectionType);
+    }
     public Resume(String fullName) {
         this(UUID.randomUUID().toString(), fullName);
     }
