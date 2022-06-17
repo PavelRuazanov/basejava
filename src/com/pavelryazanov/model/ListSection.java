@@ -1,11 +1,16 @@
 package com.pavelryazanov.model;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
 public class ListSection extends Section {
+
     private final List<String> items;
 
+    public  ListSection(String... items){
+        this(Arrays.asList(items));
+    }
     public ListSection(List<String> items) {
         Objects.requireNonNull(items, "List of items must be not NULL");
         this.items = items;
