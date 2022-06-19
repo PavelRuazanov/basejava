@@ -1,5 +1,6 @@
 package com.pavelryazanov.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.ArrayList;
@@ -10,7 +11,8 @@ import java.util.Objects;
 import static com.pavelryazanov.util.DateUtil.NOW;
 import static com.pavelryazanov.util.DateUtil.of;
 
-public class Organization {
+public class Organization implements Serializable {
+    private static final long serialVersionUID = 1L;
     private final Link homePage;
     private List<Position> positions = new ArrayList<>();
 
@@ -46,7 +48,8 @@ public class Organization {
         return result;
     }
 
-    public static class Position {
+    public static class Position implements Serializable{
+        private static final long serialVersionUID = 1L;
 
         private LocalDate startDate;
         private LocalDate endDate;
